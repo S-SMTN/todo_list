@@ -8,7 +8,7 @@ from app.models import Task, Tag
 
 class IndexView(generic.ListView):
     model = Task
-    paginate_by = 10
+    paginate_by = 3
     template_name = "app/index.html"
 
 
@@ -39,7 +39,7 @@ class TaskListToggleStatus(generic.View):
 
 class TagListView(generic.ListView):
     model = Tag
-    paginate_by = 10
+    paginate_by = 3
 
 
 class TagCreateView(generic.CreateView):
