@@ -3,7 +3,7 @@
 {% block content %}
     <h1>
         TODO LIST
-        <a href="" class="btn btn-primary link-to-page">
+        <a href="{% url 'app:task-create' %}" class="btn btn-primary link-to-page">
           Add task
         </a>
     </h1>
@@ -17,14 +17,14 @@
                 {% else %}
                     <span class="red">Not done</span>
                 {% endif %}
-                <a href="" class="btn link-to-page {{ task.is_completed|yesno:'btn-secondary,btn-success' }}">
+                <a href="{% url 'app:task-toggle' pk=task.id %}" class="btn link-to-page {{ task.is_completed|yesno:'btn-secondary,btn-success' }}">
                     {{ task.is_completed|yesno:"Undo,Complete" }}
                 </a>
             </h2> <br>
             Created at {{ task.datetime }} <br><br>
             Tags: {{ task.tag_list }}
-            <a href="">Update</a>
-            <a href="">Delete</a>
+            <a href="{% url 'app:task-update' pk=task.id %}">Update</a>
+            <a href="{% url 'app:task-delete' pk=task.id %}">Delete</a>
             <hr>
         {% endfor %}
     {% else %}
