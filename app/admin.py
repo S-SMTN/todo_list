@@ -5,7 +5,7 @@ from app.models import Tag, Task
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    fields = ["content", "deadline", "tags"]
+    fields = ["content", "deadline", "tags", "is_completed"]
     list_display = [
         "content",
         "datetime",
@@ -18,11 +18,6 @@ class TaskAdmin(admin.ModelAdmin):
         "is_completed",
         "tags"
     ]
-
-    def tag_list(self, obj: Task) -> str:
-        return ", ".join(
-            [str(tag) for tag in obj.tags.all()]
-        )
 
 
 admin.site.register(Tag)

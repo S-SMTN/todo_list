@@ -21,6 +21,11 @@ class Task(models.Model):
         related_name="tasks"
     )
 
+    def tag_list(self) -> str:
+        return ", ".join(
+            [str(tag) for tag in self.tags.all()]
+        )
+
     class Meta:
         ordering = ["is_completed", "-datetime"]
 
