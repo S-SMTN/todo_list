@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.views import generic
 
-# Create your views here.
+from app.models import Task
+
+
+class IndexView(generic.ListView):
+    model = Task
+    paginate_by = 10
+    template_name = "app/index.html"
