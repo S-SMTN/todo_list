@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
-{% block title %}<title>{{ object|yesno:"Update,Create" }} task</title>{% endblock %}
+{% block title %}<title>{{ object|yesno:"Update,Create" }} tag</title>{% endblock %}
 
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} task</h1>
+  <h1>{{ object|yesno:"Update,Create" }} tag</h1>
   <form action="" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
 
     <input type="submit" value="Submit" class="btn btn-primary">
   </form>
-  <a href="{% url 'app:index' %}" class="btn btn-primary">
+  <a href="{% url 'app:tag-list' %}" class="btn btn-primary">
     Back
   </a>
 {% endblock %}

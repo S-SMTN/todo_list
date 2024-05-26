@@ -21,7 +21,11 @@
                     {{ task.is_completed|yesno:"Undo,Complete" }}
                 </a>
             </h2> <br>
-            Created at {{ task.datetime }} <br><br>
+            Created at {{ task.datetime }}
+            {% if task.deadline %}
+                <span class="brown">{{ task.deadline }}</span>
+            {% endif %}
+            <br><br>
             Tags: {{ task.tag_list }}
             <a href="{% url 'app:task-update' pk=task.id %}">Update</a>
             <a href="{% url 'app:task-delete' pk=task.id %}">Delete</a>
