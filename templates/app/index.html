@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>
+        TODO LIST
+        <a href="{% url 'app:task-create' %}" class="btn btn-primary link-to-page">
+          Add task
+        </a>
+    </h1>
+    <br>
+    {% if task_list %}
+        {% for task in task_list %}
+            <h2>
+                {{ task }}
+                {% if task.is_completed %}
+                    <span class="blue">Done</span>
+                {% else %}
+                    <span class="red">Not done</span>
+                {% endif %}
+            </h2>
+            <form action="{% url 'app:task-toggle' pk=task.id %}" method="post" novalidate>
+                {% csrf_token %}
+
+                <input type="submit" value="{{ task.is_completed|yesno:'Undo,Complete' }}" class="btn link-to-page {{ task.is_completed|yesno:'btn-secondary,btn-success' }}">
+            </form> <br>
+            Created at {{ task.datetime }}
+            {% if task.deadline %}
+                <span class="brown">{{ task.deadline }}</span>
+            {% endif %}
+            <br><br>
+            Tags: {{ task.tag_list }}
+            <a href="{% url 'app:task-update' pk=task.id %}">Update</a>
+            <a href="{% url 'app:task-delete' pk=task.id %}">Delete</a>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>There is no tasks yet</p>
+    {% endif %}
+
+
+{% endblock %}
