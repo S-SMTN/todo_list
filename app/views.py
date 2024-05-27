@@ -30,7 +30,7 @@ class TaskDeleteView(generic.DeleteView):
 
 
 class TaskListToggleStatus(generic.View):
-    def get(self, *_, pk: int) -> HttpResponse:
+    def post(self, *_, pk: int) -> HttpResponse:
         task = Task.objects.get(id=pk)
         task.is_completed = not task.is_completed
         task.save()

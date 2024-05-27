@@ -17,10 +17,12 @@
                 {% else %}
                     <span class="red">Not done</span>
                 {% endif %}
-                <a href="{% url 'app:task-toggle' pk=task.id %}" class="btn link-to-page {{ task.is_completed|yesno:'btn-secondary,btn-success' }}">
-                    {{ task.is_completed|yesno:"Undo,Complete" }}
-                </a>
-            </h2> <br>
+            </h2>
+            <form action="{% url 'app:task-toggle' pk=task.id %}" method="post" novalidate>
+                {% csrf_token %}
+
+                <input type="submit" value="{{ task.is_completed|yesno:'Undo,Complete' }}" class="btn link-to-page {{ task.is_completed|yesno:'btn-secondary,btn-success' }}">
+            </form> <br>
             Created at {{ task.datetime }}
             {% if task.deadline %}
                 <span class="brown">{{ task.deadline }}</span>
